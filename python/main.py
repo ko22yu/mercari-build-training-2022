@@ -150,7 +150,7 @@ def get_item_information_from_db(item_id):
     cur = conn.cursor()
 
     # item_idと一致する商品の情報を表示させる
-    cur.execute("select name, category, image from items where id = ?;", (item_id, ))
+    cur.execute("select * from items where id = ?;", (item_id, ))
 
     # fetchall(): 中身を全て取得する
     content_in_db = cur.fetchall()
@@ -214,7 +214,7 @@ def get_item_information(item_id):
     # [["jacket","fashion", ...]]
     # -> {"name": "jacket", "category": "fashion", "image": "..."}
     item_information_dict = transform_list_into_dict(item_information_list[0])
-
+    del item_information_dict["id"]
     return item_information_dict
 
 
